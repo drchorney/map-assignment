@@ -89,6 +89,12 @@ namespace :ptourist do
     end
   end
 
+  def create_trips things, name, description
+    t = Trip.new(:name=> name, :description=>description)
+    t.things << things
+    t.save
+  end
+
   desc "reset all data"
   task reset_all: [:users,:subjects] do
   end
@@ -371,6 +377,26 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
 
     puts "#{Thing.count} things created and #{ThingImage.count("distinct thing_id")} with images"
     puts "#{Image.count} images created and #{ThingImage.count("distinct image_id")} for things"
+
+
+    name = "Trip # 1"
+    description = "A journey around baltimore"
+    things = [Thing.find(1),Thing.find(2),Thing.find(3)]
+
+    create_trips things, name, description
+
+    name = "Trip # 2"
+    description = "A journey further around baltimore"
+    things = [Thing.find(2),Thing.find(3),Thing.find(4),Thing.find(6)]
+
+    create_trips things, name, description
+
+    name = "Trip # 3"
+    description = "A journey really far away  around baltimore"
+    things = [Thing.find_by(:name=>"Holiday Inn Timonium")]
+
+    create_trips things, name, description
+
   end
 
 end

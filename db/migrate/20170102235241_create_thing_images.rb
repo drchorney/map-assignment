@@ -7,10 +7,17 @@ class CreateThingImages < ActiveRecord::Migration
       t.timestamps null: false
     end
 
+    create_table :trips do |t|
+      t.string :name
+      t.text :description
+      t.timestamps null: false
+    end
+
     create_table :things do |t|
       t.string :name, {null: false}
       t.text :description
       t.text :notes
+      t.references :trip, {index: true, foreign_key: true}
 
       t.timestamps null: false
     end
@@ -22,6 +29,11 @@ class CreateThingImages < ActiveRecord::Migration
       t.integer :creator_id, {null:false}
 
       t.timestamps null: false
+    end
+
+    create_table :things_trips, id: false do |t|
+      t.belongs_to :trip, index: true
+      t.belongs_to :thing, index: true
     end
 
     add_index :images, :creator_id

@@ -65,11 +65,28 @@ ActiveRecord::Schema.define(version: 20170304202140) do
     t.string   "name",        null: false
     t.text     "description"
     t.text     "notes"
+    t.integer  "trip_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
   add_index "things", ["name"], name: "index_things_on_name", using: :btree
+  add_index "things", ["trip_id"], name: "index_things_on_trip_id", using: :btree
+
+  create_table "things_trips", id: false, force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "thing_id"
+  end
+
+  add_index "things_trips", ["thing_id"], name: "index_things_trips_on_thing_id", using: :btree
+  add_index "things_trips", ["trip_id"], name: "index_things_trips_on_trip_id", using: :btree
+
+  create_table "trips", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider",               default: "email", null: false
@@ -103,4 +120,5 @@ ActiveRecord::Schema.define(version: 20170304202140) do
   add_foreign_key "roles", "users"
   add_foreign_key "thing_images", "images"
   add_foreign_key "thing_images", "things"
+  add_foreign_key "things", "trips"
 end
