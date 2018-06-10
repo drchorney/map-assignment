@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
     get 'trips' => "trips#index"
     get 'trips/:id' => "trips#show"
+    get 'trip_things/:id' => "trips#thing"
   end      
 
   get "/client-assets/:name.:format", :to => redirect("/client/client-assets/%{name}.%{format}")

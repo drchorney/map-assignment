@@ -311,6 +311,36 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     ]
     create_thing thing, organizer, members, images
 
+    # additional far out places
+    thing={:name=>"Providence Volunteer Fire Co",
+    :description=>" This is the place where volunteer fire fighters hang out and get ready to put out fires"}
+    organizer=get_user("marsha")
+    members=girl_users
+    images=[]
+    create_thing thing, organizer, members, images
+
+    thing={:name=>"Mt. Carmel Animal Hospital",
+    :description=>" The place for animal hospital ventinary stuff"}
+    organizer=get_user("marsha")
+    members=girl_users
+    images=[]
+    create_thing thing, organizer, members, images
+
+    thing={:name=>"Ladew Topiary Gardens",
+    :description=>"The gardening place of all the gardening possible"}
+    organizer=get_user("marsha")
+    members=girl_users
+    images=[]
+    create_thing thing, organizer, members, images
+
+    thing={:name=>"Annie's Playground",
+    :description=>"The gardening place of all the gardening possible"}
+    organizer=get_user("marsha")
+    members=girl_users
+    images=[]
+    create_thing thing, organizer, members, images
+
+
     organizer=get_user("peter")
     image= {:path=>"db/bta/aquarium.jpg",
      :caption=>"Aquarium",
@@ -393,7 +423,7 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
 
     name = "Trip # 3"
     description = "A journey really far away  around baltimore"
-    things = [Thing.find_by(:name=>"Holiday Inn Timonium")]
+    things = [Thing.find_by(:name=>"Holiday Inn Timonium"),Thing.find_by(:name=>"Providence Volunteer Fire Co")]
 
     create_trips things, name, description
 

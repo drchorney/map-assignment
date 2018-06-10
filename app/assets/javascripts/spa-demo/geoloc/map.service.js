@@ -15,6 +15,8 @@
       service.currentMarker = null;
       service.options = service.normalizeMapOptions(mapOptions);
       service.map = new google.maps.Map(element, service.options);    
+      service.directionsService = new google.maps.DirectionsService;
+      service.directionsDisplay = new google.maps.DirectionsRenderer({map : service.map})
     }
 
     GeolocMap.prototype.normalizeMapOptions = function(mapOptions) {
@@ -43,6 +45,45 @@
         }        
       }
     };
+
+    GeolocMap.prototype.displayRoute = function(pos1,pos2,waypts) {
+
+      // var pos1_ = new google.maps.LatLng(pos1.lat, pos1.lng);
+      // var pos2_ = new google.maps.LatLng(pos2.lat, pos2.lng);
+
+      var directionsService = this.directionsService;
+      var directionsDisplay = this.directionsDisplay;
+
+      console.log("THE FUCKIN WAY POINTS",waypts);
+
+      var formatted_waypts = []
+
+      var i;
+      for (i=0;i < waypts.length;i++) {
+
+        formatted_waypts.push({
+          location: new google.maps.LatLng(waypts[i].lat, waypts[i].lng),
+          stopover: true
+        });
+      }
+
+      directionsService.route({
+        origin: new google.maps.LatLng(pos1.lat, pos1.lng),
+        destination: new google.maps.LatLng(pos2.lat, pos2.lng),
+        waypoints: formatted_waypts,
+        optimizeWaypoints: true,
+        travelMode: 'DRIVING'
+      }, function(response,status) {
+
+        if (status=== 'OK') {
+          console.log("YAYAYA")
+          directionsDisplay.setOptions( { suppressMarkers: true } );
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
 
     GeolocMap.prototype.getMarkers = function() {
       return this.markers;

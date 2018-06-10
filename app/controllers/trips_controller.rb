@@ -10,13 +10,31 @@ class TripsController < ApplicationController
     if miles!=nil and @origin!=nil
       @trips=Trip.within_dist(@origin, miles)
     else 
-      @trips=Trip.all
+      @trips=[]
     end
 
     render "trips/index"
   end
 
   def show
+  end
+
+
+  #input into this function is the thing_id
+  def thing
+
+    thing_id = params[:id]
+    thing = Thing.find(thing_id)
+    thing_images = thing.thing_images.with_name.with_caption.with_position
+
+    thing_images.each do |ti|
+      if ti.lng != nil
+        @thing_image = ti
+        break
+      end
+    end
+
+    render "trips/thing"
   end
 
   private

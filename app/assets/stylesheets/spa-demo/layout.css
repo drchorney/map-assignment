@@ -98,6 +98,16 @@ div.area-pane div.tab-pane ul.items li.selected {
   background-color: #e0e0d1;
 }
 
+area {
+  display: none;
+}
+
+div.area-pane ul.items li.selected {
+  font-size: 1.2em;
+  font-weight: bold;
+  background-color: #e0e0d1;
+}
+
 
 div.areas-pane > ul.tab-label li a {
   line-height: 7px;

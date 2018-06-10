@@ -1,7 +1,7 @@
 class Trip < ActiveRecord::Base
   has_and_belongs_to_many :things  
 
-  # attr_accessor :things_ids
+  attr_accessor :image_content_url
 
 
   scope :within_dist, ->(origin, limit=nil) {

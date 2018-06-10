@@ -68,3 +68,7 @@
 //= require spa-demo/subjects/current_subjects/current_subjects.component
 //= require spa-demo/subjects/current_images/current_images.component
 //= require spa-demo/subjects/current_things/current_things.component
+
+//= require spa-demo/subjects/trips/trips.component
+//= require spa-demo/subjects/trips/trips.service
+//= require spa-demo/subjects/trips/map.component
