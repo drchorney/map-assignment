@@ -2,7 +2,7 @@
     <li ng-repeat="ti in $ctrl.trips"
         ng-class="{selected: $ctrl.isCurrentTrip($index)}">
       <a ng-click="$ctrl.tripClicked($index)">
-        <img ng-src="{{ti.image_content_url}}?width=100"/>
+        
         <span class="id trip_id">{{ti.id}}</span>
         <span class="name">{{ti.name}}</span> 
         <span class="name">{{ti.description}}</span> 
@@ -12,7 +12,8 @@
       <span style="font-size: 1.1em; font-weight: bold;">Stops:</span>
       <ul>
         <li ng-repeat="thing_id in ti.thing_ids">
-          {{$ctrl.getThing(thing_id)}}
+          <img width="5" ng-src="{{$ctrl.getThing(thing_id).image_content_url}}?width=50"/>
+          {{$ctrl.getThing(thing_id).thing_name}}
         </li>
       </ul>
     </li>

@@ -45,12 +45,12 @@
 
     function getThing(id) {
       if (id in vm.things) {
-        return vm.things[id].thing_name
+        return vm.things[id]
       } else {
         var result = tripsService.getThing(id);
         vm.things[id] = result
         console.log("MOTHER FUCKER",result);
-        return vm.things[id].thing_name
+        return vm.things[id]
       }
     }
   }
