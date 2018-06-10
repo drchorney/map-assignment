@@ -18,8 +18,10 @@
                                      "spa-demo.subjects.tripsService"];
   function CurrentTripsController($scope, tripsService) {
     var vm=this;
+    vm.things = {};
     vm.tripClicked = tripClicked;
     vm.isCurrentTrip = tripsService.isCurrentTripIndex;
+    vm.getThing = getThing;
 
     vm.$onInit = function() {
       console.log("CurrentImagesController",$scope);
@@ -27,13 +29,29 @@
     vm.$postLink = function() {
       $scope.$watch(
         function() { return tripsService.getTrips(); }, 
-        function(trips) { vm.trips = trips; }
+        function(trips) { 
+          vm.trips = trips; 
+
+          
+          console.log("BLARGO BLARGO",vm.trips)
+        }
       );
     }    
     return;
     //////////////
     function tripClicked(index) {
       tripsService.setCurrentTrip(index);
+    }
+
+    function getThing(id) {
+      if (id in vm.things) {
+        return vm.things[id].thing_name
+      } else {
+        var result = tripsService.getThing(id);
+        vm.things[id] = result
+        console.log("MOTHER FUCKER",result);
+        return vm.things[id].thing_name
+      }
     }
   }
 

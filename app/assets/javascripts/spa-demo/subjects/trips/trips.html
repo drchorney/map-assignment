@@ -8,5 +8,12 @@
         <span class="name">{{ti.description}}</span> 
         <!-- <span class="distance" ng-if="ti.distance">({{ti.distance | number:1 }} miles)</span> -->
       </a>
+      <br>
+      <span style="font-size: 1.1em; font-weight: bold;">Stops:</span>
+      <ul>
+        <li ng-repeat="thing_id in ti.thing_ids">
+          {{$ctrl.getThing(thing_id)}}
+        </li>
+      </ul>
     </li>
   </ul>
