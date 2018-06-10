@@ -58,7 +58,12 @@ namespace :ptourist do
   end
 
   def create_image_content img
-    url="#{BASE_URL}/#{img[:path]}"
+
+    if img[:path].include? "sowilo"
+      url = img[:path]
+    else
+      url="#{BASE_URL}/#{img[:path]}"
+    end
     puts "downloading #{url}"
     contents = open(url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE}).read
     original_content=ImageContent.new(:image_id=>img[:image].id,
@@ -316,28 +321,58 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     :description=>" This is the place where volunteer fire fighters hang out and get ready to put out fires"}
     organizer=get_user("marsha")
     members=girl_users
-    images=[]
+    images=[
+      {:path=>"https://sowilo-design-staging.s3.amazonaws.com/uploads/photo/picture/7/firehall.jpeg",
+      :caption=>"Providence Volunteer Fire Co",
+      :lng=>-76.564774, 
+      :lat=>39.423517,
+      :priority=>0
+      }  
+    ]
     create_thing thing, organizer, members, images
 
     thing={:name=>"Mt. Carmel Animal Hospital",
     :description=>" The place for animal hospital ventinary stuff"}
     organizer=get_user("marsha")
     members=girl_users
-    images=[]
+    images=[
+      {:path=>"https://sowilo-design-staging.s3.amazonaws.com/uploads/photo/picture/6/animal_hospital.jpeg",
+      :caption=>"Mt. Carmel Animal Hospital",
+      :lng=>-76.663404, 
+      :lat=>39.587777,
+      :priority=>0
+      }  
+    ]
     create_thing thing, organizer, members, images
 
     thing={:name=>"Ladew Topiary Gardens",
     :description=>"The gardening place of all the gardening possible"}
     organizer=get_user("marsha")
     members=girl_users
-    images=[]
+    images=[
+      {:path=>"https://sowilo-design-staging.s3.amazonaws.com/uploads/photo/picture/5/garden.jpeg",
+      :caption=>"Ladew Topiary Gardens",
+      :lng=>-76.513286, 
+      :lat=>39.580715,
+      :priority=>0
+      }  
+    ]
+
     create_thing thing, organizer, members, images
 
     thing={:name=>"Annie's Playground",
-    :description=>"The gardening place of all the gardening possible"}
+    :description=>"This is annie's playground, a place where things were once when they are, nice and green."}
     organizer=get_user("marsha")
     members=girl_users
-    images=[]
+    images=[
+      {:path=>"https://sowilo-design-staging.s3.amazonaws.com/uploads/photo/picture/4/playground.jpeg",
+      :caption=>"Annie's Playground",
+      :lng=>-76.380469, 
+      :lat=>39.513876,
+      :priority=>0
+      }  
+    ]
+
     create_thing thing, organizer, members, images
 
 
@@ -424,6 +459,12 @@ Work up a sweat in our 24-hour StayFit Gym, which features Life Fitness® cardio
     name = "Trip # 3"
     description = "A journey really far away  around baltimore"
     things = [Thing.find_by(:name=>"Holiday Inn Timonium"),Thing.find_by(:name=>"Providence Volunteer Fire Co")]
+
+    create_trips things, name, description
+
+    name = "Trip # 4"
+    description = "A journey around the outskirts of baltimore"
+    things = [Thing.find_by(:name=>"Mt. Carmel Animal Hospital"),Thing.find_by(:name=>"Ladew Topiary Gardens"),Thing.find_by(:name=>"Annie's Playground")]
 
     create_trips things, name, description
 

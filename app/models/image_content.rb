@@ -7,7 +7,7 @@ class ImageContent
   SMALL="320x213"
   MEDIUM="800x533"
   LARGE="1200x800"
-  CONTENT_TYPES=["image/jpeg","image/jpg"]
+  CONTENT_TYPES=["image/jpeg","image/jpg","image/png"]
   MAX_CONTENT_SIZE=10*1000*1024
 
   field :image_id, type: Integer
